@@ -87,7 +87,7 @@ DATABASES = {
         "PASSWORD": "hFCAYBQ$J9L$rEUg",
         "HOST": "spacey-backend-server.postgres.database.azure.com",
         "PORT": 5432,
-        # "OPTIONS": {"sslmode": "require"},
+        "OPTIONS": {"sslmode": "require"},
     }
 }
 
