@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-+*=+s0&!370h4%u9k(-u_ux1kluclvr*@g6!z(v3qsb4=jc=g="
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://spacey-backend.azurewebsites.net/"]
 
 
 # Application definition
@@ -82,8 +82,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "spacey-backend-database",
-        "USER": "jucvuamypx",
-        "PASSWORD": "SGFOhw21ihnbQ$lN",
+        "USER": "bhlwmyyygc",
+        "PASSWORD": "hFCAYBQ$J9L$rEUg",
         "HOST": "spacey-backend-server.postgres.database.azure.com",
         "PORT": 5432,
         # "OPTIONS": {"sslmode": "require"},
