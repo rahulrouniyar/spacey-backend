@@ -17,7 +17,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello this is rahul")
+    return HttpResponse("Hello this is rahul rouniyar from home")
 
 
 # class CustomerViewset(ModelViewSet):
