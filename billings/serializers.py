@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Customers, Product, Category
+from django.contrib.auth.models import User, Group
+from .models import Customers, Product, Bill
 
 
 class CustomerSerializer(ModelSerializer):
@@ -14,19 +15,25 @@ class ProductSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class CategorySerializer(ModelSerializer):
+class BillSerializer(ModelSerializer):
     class Meta:
-        model = Category
+        model = Bill
         fields = "__all__"
 
 
-class OrderSerializer(ModelSerializer):
-    class Meta:
-        model = Category
-        fields = "__all__"
+# class CategorySerializer(ModelSerializer):
+#     class Meta:
+#         model = Category
+#         fields = "__all__"
 
 
-class CartSerializer(ModelSerializer):
-    class Meta:
-        model = Category
-        fields = "__all__"
+# class OrderSerializer(ModelSerializer):
+#     class Meta:
+#         model = Category
+#         fields = "__all__"
+
+
+# class CartSerializer(ModelSerializer):
+#     class Meta:
+#         model = Category
+#         fields = "__all__"

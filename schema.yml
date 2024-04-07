@@ -1,0 +1,7 @@
+openapi: 3.0.3
+info:
+  title: On counter billing system for a small scale shopping mall
+  version: 1.0.0
+  description: Backend application built as an assignment for SpaceY company.
+paths: {}
+components: {}

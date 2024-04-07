@@ -1,33 +1,58 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
 
 from django.http import HttpResponse
-
-# from .models import Customers, Category, Product, Order, Cart
-# from .serializers import (
-#     CustomerSerializer,
-#     CategorySerializer,
-#     ProductSerializer,
-#     OrderSerializer,
-#     CartSerializer,
-# )
+from .models import Customers, Product, Bill
+from .serializers import CustomerSerializer, ProductSerializer, BillSerializer
 
 
 # Create your views here.
 def index(request):
-    return HttpResponse("Hello this is rahul rouniyar from home")
+    html_content = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home Page</title>
+    </head>
+    <body>
+        <h1>URLs are as follows:</h1>
+        <ul>
+            <li>/api/customers</li>
+            <li>/api/products</li>
+            <li>/api/bills</li>
+            <li>/api/schema/swagger-ui</li>
+        </ul>
+    </body>
+    </html>
+    """
+    return HttpResponse(html_content)
 
 
-# class CustomerViewset(ModelViewSet):
-#     model = Customers
-#     serializer_class = CustomerSerializer
+class CustomerViewset(ModelViewSet):
+    queryset = Customers.objects.all()
+    serializer_class = CustomerSerializer
+    authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
 
 
-# class ProductViewset(ModelViewSet):
-#     model = Product
-#     serializer_class = ProductSerializer
+class ProductViewset(ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    authentication_classes = [TokenAuthentication]
+
+
+class BillViewSet(ModelViewSet):
+    queryset = Bill.objects.all()
+    serializer_class = BillSerializer
+
+    def perform_create(self, serializer):
+        total_amount = sum(
+            product.price for product in serializer.validated_data["products"]
+        )
+        serializer.save(total_amount=total_amount)
 
 
 # class CategoryViewset(ModelViewSet):

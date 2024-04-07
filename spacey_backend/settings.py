@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = "django-insecure-+*=+s0&!370h4%u9k(-u_ux1kluclvr*@g6!z(v3qsb4=jc=g=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["spacey-backend.azurewebsites.net"]
+ALLOWED_HOSTS = ["spacey-backend.azurewebsites.net", "127.0.0.1"]
 
 
 # Application definition
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # third party app
     "rest_framework",
+    "rest_framework.authtoken",
+    "drf_spectacular",
     "djoser",
     # local app
     "billings.apps.BillingsConfig",
@@ -82,14 +85,25 @@ WSGI_APPLICATION = "spacey_backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "spacey-backend-database",
+        "NAME": "spacey-backend-db",
         "USER": "bhlwmyyygc",
-        "PASSWORD": "hFCAYBQ$J9L$rEUg",
+        "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": "spacey-backend-server.postgres.database.azure.com",
         "PORT": 5432,
         "OPTIONS": {"sslmode": "require"},
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "spaceyyy",
+#         "USER": "postgres",
+#         "PASSWORD": "Postgre@101135",
+#         "HOST": "127.0.0.1",
+#         "PORT": 5432,
+#     }
+# }
 
 
 # Password validation
@@ -128,7 +142,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorag"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
@@ -137,3 +151,25 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "billings.Employees"
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.BrowsableAPIRenderer",
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+}
+
+DJOSER = {"USER_ID_FIELD": "username"}
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "On counter billing system for a small scale shopping mall",
+    "DESCRIPTION": "Backend application built as an assignment for SpaceY company.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
