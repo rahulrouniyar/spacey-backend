@@ -19,10 +19,11 @@ def index(request):
     </head>
     <body>
         <h1>Admin username and password:</h1>
-        <u>
+        <ul>
             <li>Username: admin</li>
             <li>Password: testpass</li>
-            <li>Token: </li>
+            <li>Token: a2556db05bbe70d7d37b74eee59cb7ddfd290a96</li>
+        </ul>
         <h1>URLs are as follows:</h1>
         <ul>
             <li>/api/customers</li>
