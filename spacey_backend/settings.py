@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-+*=+s0&!370h4%u9k(-u_ux1kluclvr*@g6!z(v3qsb4=jc=g=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["spacey-backend.azurewebsites.net", "127.0.0.1"]
+ALLOWED_HOSTS = ["spacey-backend.azurewebsites.net", "127.0.0.1", ".vercel.app"]
 
 
 # Application definition
